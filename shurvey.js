@@ -2,19 +2,45 @@
 
 var express = require('express');
 var app = express();
-var API = express.Router();
-var DB = require('./db/connect.js');
+var Mongo;
 
-if(process.env.NODE_ENV == 'development'){
-	app.use(express.static('public'));
-}
+var EventChain = require('./public/js/eventchain.js');
 
-app.use('/api', API);
-API.get('/', function(req, res){
-	res.json({success: true});
-});
+(function Readying(){
+	if(process.env.NODE_ENV == 'development'){
+		app.use(express.static('public'));
+	}
+	app.set('PORT', process.env.PORT);
+})();
 
-app.set('PORT', process.env.PORT || 3000);
-app.listen(app.get('PORT'), function(){
-	console.log('Running env ' + process.env.NODE_ENV + ' on port ' + app.get('PORT'));
-});
+(function Running(){
+	require('./db/connect.js').then(function(DB){
+		Mongo = DB;
+		app.listen(app.get('PORT'), function(){
+			console.log('Running env ' + process.env.NODE_ENV + ' on port ' + app.get('PORT'));
+		});
+	});
+})();
+
+(function Routing(){
+	var API = express.Router();
+	app.use('/api', API);
+	API.get('/', function(req, res){
+		res.json({success: true});
+	});
+	API.get('/questions', function(req, res){
+		EventChain([
+			function(args, next){
+				Mongo.collection('questions', next);
+			},
+			function(args, next){
+				var questions = args[1];
+				questions.find({}).toArray(next);
+			},
+			function(args, next){
+				var questions = args[1];
+				res.json(questions);
+			}
+		]);
+	});
+})();

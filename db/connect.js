@@ -1,6 +1,6 @@
 'use strict';
 
-var url = process.env.MONGO_URL || 'mongodb://localhost:27017/shurvey';
+var url = process.env.MONGO_URL;
 
 console.log('Connecting to MongoDB at ' + url + '...');
 

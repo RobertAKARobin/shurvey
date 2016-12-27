@@ -1,0 +1,41 @@
+{
+	"questions": [
+		{
+			"prompt": "Which of these colors do you like best?",
+			"answers": [
+				"red",
+				"blue",
+				"green"
+			]
+		},
+		{
+			"prompt": "Which best describes the weather outside?",
+			"answers": [
+				"too cold",
+				"too hot",
+				"too wet",
+				"comfortable"
+			]
+		},
+		{
+			"prompt": "Which best describes how you're feeling?",
+			"answers": [
+				"bored",
+				"anxious",
+				"happy",
+				"sad",
+				"angry"
+			]
+		},
+		{
+			"prompt": "What is 3 + 7?",
+			"answers": [
+				21,
+				4,
+				37,
+				10,
+				3.7
+			]
+		}
+	]
+}
