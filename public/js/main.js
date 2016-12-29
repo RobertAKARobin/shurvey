@@ -1,9 +1,12 @@
 'use strict';
 
-(function (){
+(function(){
 
-	AJAX.getJSON('/api/questions', function(){
-		console.log(arguments)
-	});
+	EventChain([
+		Question.getBatch,
+		function(args, next){
+			console.log('All questions loaded')
+		}
+	])
 
 })();

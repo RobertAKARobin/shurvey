@@ -13,4 +13,6 @@ function EventChain(events){
 	}
 }
 
-(module || {}).exports = EventChain;
+if(typeof module !== 'undefined'){
+	module.exports = EventChain;
+}

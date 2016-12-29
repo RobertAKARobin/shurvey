@@ -23,7 +23,6 @@ var AJAX = (function(){
 
 	function getJSON(url, callback){
 		var request = new XMLHttpRequest();
-		console.log(request)
 		request.open('GET', url, true);
 		request.setRequestHeader('Content-Type', 'application/json');
 		request.onreadystatechange = handleResponse.bind(callback);
