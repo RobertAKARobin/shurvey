@@ -1,3 +1,9 @@
 'use strict';
 
-document.write('This is main.js');
+(function (){
+
+	AJAX.getJSON('/api/questions', function(){
+		console.log(arguments)
+	});
+
+})();
